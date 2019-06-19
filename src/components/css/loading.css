@@ -1,0 +1,119 @@
+:root {
+    --spinner-sz: 16.5em;
+    --spinner-sz-r: 67.87vh;
+    --dot-sz: 30%;
+}
+
+.load-message {
+    font-size: 1.4em;
+    text-align: center;
+    color: var(--light);
+    margin-bottom: auto;
+    color: #FFFFFF;
+    animation: pulse 1.0s infinite linear;
+    /* background: var(--twitter); */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.015);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.background-container {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 99.5%;
+    background: rgba(0, 0, 0, .74);
+    /* padding: 10%; */
+    align-items: center;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-height: 390px) {
+    .spinner {
+        width: var(--spinner-sz-r) !important;
+        height: var(--spinner-sz-r) !important;
+        background: #c0ffee;
+        margin: 2px auto;
+    }
+}
+
+.spinner {
+    margin-top: auto;
+    width: var(--spinner-sz);
+    height: var(--spinner-sz);
+    position: relative;
+    text-align: center;
+    /* max-height: 45.5em; */
+    border-radius: 100%;
+    background: var(--twitter);
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dot1,
+.dot2 {
+    width: var(--dot-sz);
+    height: var(--dot-sz);
+    display: inline-block;
+    position: absolute;
+    top: .6em;
+    left: 36%;
+    background-color: var(--light);
+    border-radius: 100%;
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+    top: auto;
+    bottom: .6em;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate {
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes sk-rotate {
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes sk-bounce {
+    0%,
+    100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bounce {
+    0%,
+    100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
