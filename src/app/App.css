@@ -1,186 +1,325 @@
 :root {
-    --twitter: #43bdef;
-    --dark: #333;
-    --light: #fff;
-    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
-    --ge-padding: 0em 5em;
-    --user-img: 48px;
+  --twitter : #43bdef;
+  --dark    : #333;
+  --light   : #fff;
+  --shadow  : 0 1px 5px rgba(104, 104, 104, 0.8);
+  --user-img: 48px;
 }
 
 html {
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--dark);
+  box-sizing : border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color      : var(--dark);
 }
 
 body {
-    margin: 0px;
+  margin: 0px;
 }
 
 .app {
-    background-color: #e6ecf0;
-    line-height: 1.2;
-    height: 100vh;
+  background-color: #e6ecf0;
+  line-height     : 1.2;
+  height          : 100vh;
 }
 
 .header {
-    position: fixed;
-    width: 100%;
-    max-height: 41px;
-    background-color: var(--light);
-}
-
-.header__container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    align-items: center;
-    color: var(--twitter);
-    padding: var(--ge-padding);
-    font-weight: 700;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  padding: .3rem 1rem;
 }
 
 .header__title {
-    display: flex;
-    height: 100%;
-    cursor: pointer;
-    margin-right: auto;
-    border-bottom: 2px solid;
-    text-align: center;
-    align-items: center;
-    padding: 0px 10px;
-    min-width: 120px;
+  display    : inline-flex;
+  align-items: center;
 }
 
-.header__icon {
-    font-size: medium;
-    text-align: center;
-    color: var(--twitter);
-    text-decoration: none !important;
+.header__title::after {
+  content   : "";
+  display   : block;
+  height    : 2px;
+  background: white;
+  position  : absolute;
+  width     : 298px;
+  bottom    : 0;
 }
 
-.header__button-log {
-    border-radius: 100px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 20px;
-    text-align: center;
-    white-space: nowrap;
-    background-color: #4AB3F4;
-    border-color: transparent;
-    color: var(--light);
-    margin-left: auto;
-    padding: 5px 24px;
+.header__icon-container {
+  border         : 2px solid white;
+  border-radius  : 100%;
+  height         : 35px;
+  width          : 35px;
+  display        : inline-flex;
+  margin   : auto 8px;
+  justify-content: center;
+  align-items    : center;
+  background     : var(--twitter)
 }
 
-.--color-twitter {
-    color: var(--twitter);
+.landing {
+  background-color: #282c34;
+  color           : #fff;
+  padding         : .4rem 2rem 1rem;
+  position        : relative;
+  margin-bottom   : 1rem;
 }
 
-.main-container {
-    display: grid;
-    padding-top: 3.4em;
-    margin: 0 auto;
-    max-width: 1190px;
+.landing__container {
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  min-height     : 450px;
+  margin         : 0 auto;
+  max-width      : 800px;
+  position       : relative;
+  overflow       : hidden;
 }
+
+.landing__content {
+  z-index  : 1;
+  animation: scale-in-center 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes scale-in-center {
+
+  0%,
+  50% {
+    -webkit-transform: translateY(50px);
+    transform        : translateY(50px);
+    opacity          : 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform        : translateY(0);
+    opacity          : 1;
+  }
+}
+
+@keyframes slide-in-bck-left {
+
+  0%,
+  50% {
+    -webkit-transform: translateZ(350px) translateX(-200px);
+    transform        : translateZ(350px) translateX(-200px);
+    opacity          : 0;
+  }
+
+  100% {
+    -webkit-transform: translateZ(0) translateX(0);
+    transform        : translateZ(0) translateX(0);
+    opacity          : 1;
+  }
+}
+
+
+.landing__background {
+  position           : absolute;
+  background-image   : url("../image/twitter-logo.svg");
+  background-repeat  : no-repeat;
+  background-position: 50%;
+  background-size    : 60%;
+  animation          : slide-in-left 1s ease-out;
+  height             : 100%;
+  width              : inherit;
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-500px) rotate(35deg) scale(.8);
+    transform        : translateX(-500px) rotate(35deg) scale(.8);
+    opacity          : 0;
+  }
+
+  50% {
+    -webkit-transform: translateX(0) rotate(35deg) scale(.8);
+    transform        : translateX(0) rotate(35deg) scale(.8);
+    opacity          : 1;
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.landing__content-title {
+  color         : var(--twitter);
+  font-weight   : 700;
+  font-size     : 3rem;
+  margin        : 0;
+  letter-spacing: 2px;
+}
+
+.landing__appName {
+  font-size: 3.4rem;
+  display  : inline-block;
+}
+
+.landing__content-text {
+  font-size     : 1.5rem;
+  line-height   : 2.6rem;
+  margin-top    : 2.6rem;
+  letter-spacing: 1.2px;
+  z-index       : 1;
+}
+
+.landing__button {
+  font-size: 1.5rem;
+  padding  : .375rem 1.375rem;
+}
+
+.landing__button-icon {
+  margin-left: .5rem;
+}
+
+.landing__icon-happy {
+  animation: slide-top 0.5s ease-out infinite alternate;
+}
+
+.landing__icon-pulsate {
+  margin-left: .5rem;
+  animation  : pulsate-fwd 0.5s ease-in-out infinite both;
+}
+
+@keyframes slide-top {
+  0% {
+    transform: translateY(0);
+  }
+
+  60%,
+  80%,
+  100% {
+    transform: translateY(-8px);
+  }
+
+  70% {
+    transform: translateY(-8px) rotate(-30deg);
+  }
+
+  90% {
+    transform: translateY(-8px) rotate(30deg);
+  }
+}
+
+@keyframes pulsate-fwd {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.landing__bottom {
+  display: flex;
+  width  : 83%;
+  margin : 0 auto 1rem auto;
+}
+
+.landing__bottom-item {
+  flex-grow       : 1;
+  height          : 70px;
+  background-color: rgba(0, 0, 0, .1);
+  border-radius   : 5px;
+  margin          : auto 10px;
+}
+
 
 .welcome-box {
-    /* align-items: center; */
-    text-align: center;
+  /* align-items: center; */
+  text-align    : center;
 }
 
 .welcome-box__img {
-    height: 25em;
-    width: auto;
+  height: 25em;
+  width : auto;
 }
 
 .welcome-box__title {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .welcome-box__footer {
-    width: 100%;
-    text-align: center;
+  width     : 100%;
+  text-align: center;
 }
 
 
 /*USER LOGED*/
 
 .main-container--loged {
-    display: grid;
-    grid-template-columns: 33.3% auto;
+  display              : grid;
+  grid-template-columns: 33.3% auto;
 }
 
 .user-data {
-    padding-left: .9em;
-    padding-top: 2em;
-    display: flex;
+  padding-left: .9em;
+  padding-top : 2em;
+  display     : flex;
 }
 
 .user-data .user-data__profile {
-    border: 3px solid #fff;
+  border: 3px solid #fff;
 }
 
 .user-data__profile {
-    background: #fff;
-    max-width: var(--user-img);
-    max-height: var(--user-img);
-    height: auto;
+  background: #fff;
+  max-width : var(--user-img);
+  max-height: var(--user-img);
+  height    : auto;
 }
 
 .user-data__profile,
 .user-data__img {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .user-data__title a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .user-data__full-name,
 .user-data__full-name a {
-    color: var(--dark);
-    margin-left: .1em;
-    margin-right: .5em;
-    margin-bottom: .1em;
-    font-weight: 700;
+  color        : var(--dark);
+  margin-left  : .1em;
+  margin-right : .5em;
+  margin-bottom: .1em;
+  font-weight  : 700;
 }
 
 .user-data__user-name,
 .user-data__user-name a {
-    color: #657786;
-    margin: .1em;
-    font-weight: 500;
+  color      : #657786;
+  margin     : .1em;
+  font-weight: 500;
 }
 
 .user-data__user-name::before {
-    content: '@';
+  content: '@';
 }
 
 .user-data__title a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .tweet-container {
-    border-radius: 5px;
-    background-color: #fff;
-    border: 1px solid #e6ecf0;
-    padding: 13px 15px 15px;
-    display: flex;
+  border-radius   : 5px;
+  background-color: #fff;
+  border          : 1px solid #e6ecf0;
+  padding         : 13px 15px 15px;
+  display         : flex;
 }
 
 .tweet-header-data {
-    display: flex;
-    align-items: baseline;
+  display    : flex;
+  align-items: baseline;
 }
 
 .tweet-content {
-    padding-left: .8em;
+  padding-left: .8em;
 }
 
 .tweet-text {
-    margin: 0;
-    font-size: 21px;
+  margin   : 0;
+  font-size: 21px;
 }

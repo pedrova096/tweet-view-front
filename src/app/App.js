@@ -4,7 +4,7 @@ import "./App.css";
 import Loading from "../components/loading";
 import { withRouter } from "react-router-dom";
 import Tweets from '../components/tweets'
-
+import LayoutComponent from '../components/Layout'
 class App extends Component {
   state = { tweets: [] };
   constructor() {
@@ -43,6 +43,9 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <LayoutComponent
+        />
+        {/*
         <header className="header">
           {this.getWelcomeHeader()}
         </header>
@@ -50,6 +53,7 @@ class App extends Component {
           {this.getMainContain()}
         </div>
         <Loading {...this.getLoadingProps()} />
+        */}
       </div>
     );
   }
