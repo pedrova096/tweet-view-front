@@ -112,10 +112,6 @@ body {
 
 .landing__background {
   position           : absolute;
-  background-image   : url("../image/twitter-logo.svg");
-  background-repeat  : no-repeat;
-  background-position: 50%;
-  background-size    : 60%;
   animation          : slide-in-left 1s ease-out;
   height             : 100%;
   width              : inherit;
