@@ -15,7 +15,7 @@ export default ({
     <>
       <Jumbotron fluid className="landing">
         <Container className="landing__container">
-          <TwitterLogo className="landing__background" />
+          <TwitterLogo classSvg="landing__background" />
           <div className="landing__content">
             <div className="landing__content-title">
               Welcome to <br />
