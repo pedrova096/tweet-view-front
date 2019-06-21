@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLaughWink } from '@fortawesome/free-solid-svg-icons'
 import clsx from 'clsx';
+import TwitterLogo from 'image/TwitterLogo';
+
 export default ({
   onGetStarted = () => { }
 }) => {
@@ -13,7 +15,7 @@ export default ({
     <>
       <Jumbotron fluid className="landing">
         <Container className="landing__container">
-          <div className="landing__background" />
+          <TwitterLogo className="landing__background" />
           <div className="landing__content">
             <div className="landing__content-title">
               Welcome to <br />
