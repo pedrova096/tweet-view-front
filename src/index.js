@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/App';
 import TweetLogin from './components/tweet-login';
-import Loading from './components/loading'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 require('dotenv').config()
@@ -13,7 +12,7 @@ ReactDOM.render(
       <Route exact path='/' component={App} />
       <Route path='/index' component={App} />
       <Route path='/tweet-login' component={TweetLogin} />
-      <Route path='/load' component={() => <Loading loading />} />
+      {/*<Route path='/load' component={() => <Loading loading />} />*/}
     </div>
   </Router>,
   document.getElementById('root'));

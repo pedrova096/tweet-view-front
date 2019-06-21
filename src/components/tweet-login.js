@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Axios from 'axios';
-import Loading from './loading';
 import { Route, withRouter } from 'react-router-dom';
 import * as qs from 'querystring';
 export class TweetLogin extends Component {
@@ -33,9 +32,7 @@ export class TweetLogin extends Component {
     }
   }
   render() {
-    return (<
-      Loading {...this.getLoadingProps()}
-    />);
+    return (<></>);
   }
   getLoadingProps() {
     return {
