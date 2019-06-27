@@ -3,15 +3,17 @@ import axios from 'axios';
 import HeaderComponent from './dump/Header'
 import LandingComponent from './dump/Landing'
 import LoadingComponent from './dump/Loading';
+import ContentComponent from './Content';
 
 function useFetchUser() {
   const [userData, setUserData] = useState(null)
   useEffect(() => {
     const _userData = getUserData();
-    setUserData(_userData);
-    if (_userData) {
+    if (!!_userData) {
+      console.log({ _userData })
       getUserTweets();
     }
+    setUserData(_userData);
   }, []);
   return { userData }
 
@@ -33,7 +35,7 @@ export default () => {
       />
       {
         hasData ?
-          <div />
+          <ContentComponent {...userData} />
           :
           <>
             <LandingComponent onGetStarted={() => setLoading({ open: true, text: 'redirecting' })} />
@@ -58,15 +60,19 @@ function getUserData() {
 }
 
 async function getUserTweets() {
-  const userToken = localStorage.getItem("user-token");
-  const { data } = await axios({
-    method: 'post',
-    url: `${process.env.REACT_APP_API}/user-tweets`,
-    data: { userToken }
-  });
-  console.log({
-    data
-  })
+  try {
+    const userToken = localStorage.getItem("user-token");
+    const { data } = await axios({
+      method: 'post',
+      url: `${process.env.REACT_APP_API}/user-tweets`,
+      data: { userToken }
+    });
+    console.log({
+      data
+    })
+  } catch (error) {
+    console.log({ error })
+  }
 }
 
 async function getUrlToken() {
