@@ -6,13 +6,9 @@ const Loading = ({ open, text, onDidMount }) => {
   const [afterSecond, setAfter] = useState(false)
   useEffect(() => {
     if (open) {
-      const timer = setTimeout(() => {
-        setAfter(true);
-        onDidMount();
-      }, 1000);
-      return () => clearTimeout(timer);
+      const timer = setTimeout(() => { setAfter(true); }, 1000);
+      return () => { clearTimeout(timer) };
     }
-    return () => { };
   });
   return (
     <div className={clsx({
