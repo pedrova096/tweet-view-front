@@ -5,33 +5,32 @@ import LandingComponent from './dump/Landing'
 import LoadingComponent from './dump/Loading';
 import ContentComponent from './Content';
 
-function useFetchUser() {
-  const [userData, setUserData] = useState(null)
-  useEffect(() => {
-    const _userData = getUserData();
-    if (!!_userData) {
-      console.log({ _userData })
-      getUserTweets();
-    }
-    setUserData(_userData);
-  }, []);
-  return { userData }
-
-}
-
 export default () => {
+  const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState({ open: false, text: '' });
-  const { userData } = useFetchUser();
-  const hasData = !!userData;
+
+  useEffect(() => {
+    setUserData(getUserData());
+  }, []);
   useEffect(() => {
     if (loading.open) {
       getUrlToken();
     }
   }, [loading])
+
+  const hasData = !!userData;
+  const button = hasData ? ({
+    text: "LOG OUT",
+    onClick: () => {
+      logOutUser();
+      setUserData(null)
+    }
+  }) : null;
   return (
     <>
       <HeaderComponent
         title={hasData ? `Welcome ${userData.name}` : "Welcome to Tweet Viewer"}
+        button={button}
       />
       {
         hasData ?
@@ -59,22 +58,6 @@ function getUserData() {
   }
 }
 
-async function getUserTweets() {
-  try {
-    const userToken = localStorage.getItem("user-token");
-    const { data } = await axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_API}/user-tweets`,
-      data: { userToken }
-    });
-    console.log({
-      data
-    })
-  } catch (error) {
-    console.log({ error })
-  }
-}
-
 async function getUrlToken() {
   try {
     const { data } = await axios.get(`${process.env.REACT_APP_API}/twitter-login`)
@@ -83,4 +66,9 @@ async function getUrlToken() {
   } catch (error) {
     console.log({ error });
   }
+}
+
+function logOutUser() {
+  localStorage.removeItem('user');
+  localStorage.removeItem('user-token');
 }

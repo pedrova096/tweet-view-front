@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 
-const Header = ({ title }) => {
+const Header = ({ title, button }) => {
   return (
     <Navbar bg="dark" variant="dark" className="header">
       <Navbar.Brand href="#home" className="header__title">
@@ -15,7 +15,7 @@ const Header = ({ title }) => {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
-        {false && <Button type="submit">Submit</Button>}
+        {!!button && <Button type="submit" onClick={button.onClick}>{button.text}</Button>}
       </Navbar.Collapse>
     </Navbar>
 
