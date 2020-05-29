@@ -1,2 +1,2 @@
-export const LANDING = `/`;
-export const LOGGING = '/logging';
+export const LANDING = "/";
+export const LOGGING = "/tweet-login";
