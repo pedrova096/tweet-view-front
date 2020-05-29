@@ -11,10 +11,9 @@ export default ({ history }) => {
   useEffect(() => {
     try {
       const user = localStorage.getItem("user");
-      if (!user) {
-        throw Error("No valido");
+      if (user) {
+        setUserData(JSON.parse(user));
       }
-      setUserData(JSON.parse(user));
     } catch (err) {
       console.error("getUserData", err);
     }
