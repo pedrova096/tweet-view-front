@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Badge from 'react-bootstrap/Badge';
-import axios from 'axios';
 
 function useFetch() {
   const [tweets, setTweets] = useState([])
@@ -81,10 +80,9 @@ export default (props) => {
 async function getUserTweets() {
   try {
     const userToken = localStorage.getItem("user-token");
-    const { data } = await axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_API}/user-tweets`,
-      data: { userToken }
+    const { data } = await fetch(`${process.env.REACT_APP_API}/user-tweets`, {
+      method: 'POST',
+      body: JSON.stringify({ userToken })
     });
     if (data.ok) {
       return data.data;
