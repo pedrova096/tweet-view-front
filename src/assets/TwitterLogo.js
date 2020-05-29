@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ color = "#41414677", classSvg = "", classPath = {}, children }) => (
+export default ({ color = "#41414677", classSvg = "", classPath = "", children }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
