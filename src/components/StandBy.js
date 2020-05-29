@@ -14,6 +14,9 @@ export default ({ history, location }) => {
         const paramsReq = { ...params, userToken };
         const data = await fetch(`${process.env.REACT_APP_API}/twitter-user`, {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(paramsReq),
         }).then((result) => result.json());
         if (data.ok) {
