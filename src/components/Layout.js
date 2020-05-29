@@ -1,74 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import HeaderComponent from './dump/Header'
-import LandingComponent from './dump/Landing'
-import LoadingComponent from './dump/Loading';
-import ContentComponent from './Content';
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import HeaderComponent from "./dump/Header";
+import LandingComponent from "./dump/Landing";
+import LoadingComponent from "./dump/Loading";
+import ContentComponent from "./Content";
 
-export default () => {
-  const [userData, setUserData] = useState(null)
-  const [loading, setLoading] = useState({ open: false, text: '' });
+export default ({ history }) => {
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState({ open: false, text: "" });
 
   useEffect(() => {
-    setUserData(getUserData());
+    try {
+      const user = localStorage.getItem("user");
+      if (!user) {
+        throw Error("No valido");
+      }
+      setUserData(JSON.parse(user));
+    } catch (err) {
+      console.error("getUserData", err);
+    }
   }, []);
-  useEffect(() => {
-    if (loading.open) {
-      getUrlToken();
-    }
-  }, [loading])
 
-  const hasData = !!userData;
-  const button = hasData ? ({
-    text: "LOG OUT",
-    onClick: () => {
-      logOutUser();
-      setUserData(null)
+  const handleStart = useCallback(async () => {
+    try {
+      setLoading({ open: true, text: "redirecting" });
+      const data = await fetch(
+        `${process.env.REACT_APP_API}/twitter-login`, {
+          method: "GET",
+        }
+      ).then(result => result.json());
+      localStorage.setItem("user-token", data.userToken);
+      window.location = data.URLToken;
+    } catch (error) {
+      setLoading({ open: false, text: "There was an error, try later" });
+      console.error("onGetStarted", error);
     }
-  }) : null;
+  }, []);
+
+  const handleLogoutUser = useCallback(() => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("user-token");
+    setUserData(null);
+  }, []);
+
+  const hasData = useMemo(() => !!userData, [userData]);
+
   return (
     <>
       <HeaderComponent
         title={hasData ? `Welcome ${userData.name}` : "Welcome to Tweet Viewer"}
-        button={button}
+        onLogout={hasData ? handleLogoutUser : null}
       />
-      {
-        hasData ?
-          <ContentComponent {...userData} />
-          :
-          <>
-            <LandingComponent onGetStarted={() => setLoading({ open: true, text: 'redirecting' })} />
-            <LoadingComponent open={loading.open} text={loading.text} />
-          </>
-      }
+      {hasData ? (
+        <ContentComponent {...userData} />
+      ) : (
+        <>
+          <LandingComponent onGetStarted={handleStart} />
+          <LoadingComponent open={loading.open} text={loading.text} />
+        </>
+      )}
     </>
-  )
-}
-
-function getUserData() {
-  let user = localStorage.getItem("user");
-  try {
-    user = user && JSON.parse(user);
-    if (!user) {
-      throw Error("No valido");
-    }
-    return user;
-  } catch (exc) {
-    return null;
-  }
-}
-
-async function getUrlToken() {
-  try {
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/twitter-login`)
-    localStorage.setItem("user-token", data.userToken);
-    window.location = data.URLToken;
-  } catch (error) {
-    console.log({ error });
-  }
-}
-
-function logOutUser() {
-  localStorage.removeItem('user');
-  localStorage.removeItem('user-token');
-}
+  );
+};
