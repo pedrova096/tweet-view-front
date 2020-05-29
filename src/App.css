@@ -125,6 +125,7 @@ body,
   animation: slide-in-left 1s ease-out;
   height   : 100%;
   width    : inherit;
+  fill-opacity: 0.46666667;
 }
 
 @keyframes slide-in-left {
