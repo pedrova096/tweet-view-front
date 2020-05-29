@@ -22,7 +22,7 @@ export default ({ onGetStarted = () => {} }) => {
             </div>
             <p className="landing__content-text">
               The easy way to see and create tweets <br />
-              beside Twitter &copy;
+              besides Twitter &copy;
             </p>
             <Button
               variant="outline-light"
