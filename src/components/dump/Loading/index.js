@@ -1,7 +1,7 @@
 import "./styles.css";
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import TwitterLogo from "assets/TwitterLogo";
+import TwitterLogo from "../../../assets/TwitterLogo";
 const Loading = ({ open, text, onDidMount }) => {
   const [afterSecond, setAfter] = useState(false);
   useEffect(() => {
