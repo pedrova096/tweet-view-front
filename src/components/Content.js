@@ -18,8 +18,11 @@ const useFetch = () => {
           {
             method: "POST",
             body: JSON.stringify({ userToken }),
+            headers: {
+              "Content-Type": "application/json",
+            }
           }
-        ).then(f => f.json());
+        ).then(result => result.json());
         if (data.ok) {
           tweets = data.data;
         } else {
