@@ -13,13 +13,13 @@ const useFetch = () => {
       let tweets = [];
       try {
         const userToken = localStorage.getItem("user-token");
-        const { data } = await fetch(
+        const data = await fetch(
           `${process.env.REACT_APP_API}/user-tweets`,
           {
             method: "POST",
             body: JSON.stringify({ userToken }),
           }
-        );
+        ).then(f => f.json());
         if (data.ok) {
           tweets = data.data;
         } else {
